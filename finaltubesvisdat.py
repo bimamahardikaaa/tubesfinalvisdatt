@@ -67,29 +67,21 @@ def buatplot(src, feature):
             x_axis_label = 'Date', y_axis_label = 'Feature Selected')
 
     c.multi_line('x', 'y', color = 'color', legend_field = 'label', line_width = 2, source = src)
-
-    tooltips = [ ('Date','$x'), ('Total', '$y'), ]
-           
-    c.add_tools(HoverTool(tooltips=tooltips)) # Melakukan hover
-
+    tambahan = [ ('Date','$x'), ('Total', '$y'), ]     
+    c.add_tools(HoverTool(tambahan=tambahan)) # Melakukan hover
     return c
 
 # Method callback untuk interaktif checkbox
 def updatelokasi(attr, old, new):
     lokasi_plot = [lokasi_selection.labels[i] for i in lokasi_selection.active]
-
     new_index = buatdataset(lokasi_plot, feature_select.value)
-
     src.data.update(new_index.data)
 
 # Method callback untuk interaktif dropdown
 def updatefitur(attr, old, new):
     lokasi_plot = [lokasi_selection.labels[i] for i in lokasi_selection.active]
-    
     feature = feature_select.value
-    
     new_index = buatdataset(lokasi_plot, feature)
-
     src.data.update(new_index.data)
 
 # Pembuatan checkboxgroup berdasarkan pada provinsi/lokasi

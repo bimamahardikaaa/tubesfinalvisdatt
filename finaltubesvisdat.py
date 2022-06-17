@@ -11,14 +11,14 @@ from bokeh.models.widgets import CheckboxGroup, Slider, RangeSlider, Tabs
 from bokeh.layouts import column, row, WidgetBox
 
 # Read data
-temp = pd.read_csv("./data/covid19indonesia.csv")
+indekscovid = pd.read_csv("./data/covid19indonesia.csv")
 
 # Mengubah nilai kolom date dari object menjadi datetime
-temp["Date"] = pd.to_datetime(temp["Date"])
-temp
+indekscovid["Date"] = pd.to_datetime(indekscovid["Date"])
+indekscovid
 
 # Mendrop baris indonesia
-data = temp[temp["Location"].str.contains("Indonesia")==False]
+data = indekscovid[indekscovid["Location"].str.contains("Indonesia")==False]
 
 # Mengambil data yang diperlukan
 data = data[['Date', 'Location', 'Total Cases', 'Total Deaths', 'Total Recovered', 'Total Active Cases']]

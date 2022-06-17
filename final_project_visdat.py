@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from bokeh.plotting import figure
-from bokeh.plotting import show
-from bokeh.io import curdoc
 from bokeh.models import ColumnDataSource, HoverTool, Select
-from bokeh.models.widgets import Tabs, Panel
 from bokeh.layouts import row, widgetbox
 from bokeh.palettes import Category20_16
-from bokeh.models.widgets import CheckboxGroup, Slider, RangeSlider, Tabs
+from bokeh.models.widgets import Tabs, Panel
+from bokeh.plotting import show
+from bokeh.io import curdoc
 from bokeh.layouts import column, row, WidgetBox
+from bokeh.models.widgets import CheckboxGroup, Slider, RangeSlider, Tabs
 
 # Read data
 temp = pd.read_csv("./data/covid_19_indonesia_time_series_all.csv")

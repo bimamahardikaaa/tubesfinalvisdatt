@@ -2,7 +2,7 @@
 # Anggota : 
 # 1. Bima Mahardika Wirawan 1301194304
 # 2. Muhammad Rifqi Arrahim 1301190425 
-# 3. Aini Nasywa 130
+# 3. Aini Nasywa 1301194237
 
 import pandas as pd
 from bokeh.plotting import figure
@@ -55,23 +55,20 @@ def buatdataset(lokasi, feature):
         colors.append(Category20_16[i])
         labels.append(lokasi)
 
-    new_src = ColumnDataSource(data={'x': list_x, 'y': list_y, 'color': colors, 'label': labels})
+    new_index = ColumnDataSource(data={'x': list_x, 'y': list_y, 'color': colors, 'label': labels})
 
-    return new_src
+    return new_index
 
 # Method untuk pembuatan multiple line plot yang akan di select nanti
 def buatplot(src, feature):
     
-    c = figure(plot_width = 700, plot_height = 400, 
+    c = figure(plot_width = 820, plot_height = 430, 
             title = 'Covid19-Indonesia',
             x_axis_label = 'Date', y_axis_label = 'Feature Selected')
 
     c.multi_line('x', 'y', color = 'color', legend_field = 'label', line_width = 2, source = src)
 
-    tooltips = [
-            ('Date','$x'),
-            ('Total', '$y'),
-           ]
+    tooltips = [ ('Date','$x'), ('Total', '$y'), ]
            
     c.add_tools(HoverTool(tooltips=tooltips)) # Melakukan hover
 
@@ -81,9 +78,9 @@ def buatplot(src, feature):
 def updatelokasi(attr, old, new):
     lokasi_plot = [lokasi_selection.labels[i] for i in lokasi_selection.active]
 
-    new_src = buatdataset(lokasi_plot, feature_select.value)
+    new_index = buatdataset(lokasi_plot, feature_select.value)
 
-    src.data.update(new_src.data)
+    src.data.update(new_index.data)
 
 # Method callback untuk interaktif dropdown
 def updatefitur(attr, old, new):
@@ -91,9 +88,9 @@ def updatefitur(attr, old, new):
     
     feature = feature_select.value
     
-    new_src = buatdataset(lokasi_plot, feature)
+    new_index = buatdataset(lokasi_plot, feature)
 
-    src.data.update(new_src.data)
+    src.data.update(new_index.data)
 
 # Pembuatan checkboxgroup berdasarkan pada provinsi/lokasi
 lokasi_selection = CheckboxGroup(labels=lokasi, active = [0])
@@ -102,9 +99,7 @@ lokasi_selection.on_change('active', updatelokasi)
 # Pembuatan fitur select dropdown 
 feature_select = Select(options = col_list[2:], value = 'Total Cases', title = 'Feature Select')
 feature_select.on_change('value', updatefitur)
-
 lokasi_now = [lokasi_selection.labels[i] for i in lokasi_selection.active]
-
 src = buatdataset(lokasi_now, feature_select.value)
 
 # Pemanggilan method plot
@@ -112,7 +107,5 @@ c = buatplot(src, feature_select.value)
 
 # Pemasangan widget untuk interaktive visualisasi data covid
 controls = WidgetBox(feature_select, lokasi_selection)
-
 layout = row(controls, c)
-
 curdoc().add_root(layout)

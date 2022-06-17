@@ -84,7 +84,7 @@ def update_lokasi(attr, old, new):
 
     new_src = buat_dataset(lokasi_plot, feature_select.value)
 
-    src.datacovid.update(new_src.datacovid)
+    src.data.update(new_src.data)
 
 # Method callback untuk interaktif dropdown
 def update_fitur(attr, old, new):
@@ -94,7 +94,7 @@ def update_fitur(attr, old, new):
     
     new_src = buat_dataset(lokasi_plot, feature)
 
-    src.datacovid.update(new_src.datacovid)
+    src.data.update(new_src.data)
 
 # Pembuatan checkboxgroup berdasarkan provinsi/lokasi
 lokasi_selection = CheckboxGroup(labels=lokasi, active = [0])

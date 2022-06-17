@@ -18,17 +18,17 @@ indekscovid["Date"] = pd.to_datetime(indekscovid["Date"])
 indekscovid
 
 # Mendrop baris indonesia
-data = indekscovid[indekscovid["Location"].str.contains("Indonesia")==False]
+datacovid = indekscovid[indekscovid["Location"].str.contains("Indonesia")==False]
 
 # Mengambil data yang diperlukan
-data = data[['Date', 'Location', 'Total Cases', 'Total Deaths', 'Total Recovered', 'Total Active Cases']]
-data
+datacovid = datacovid[['Date', 'Location', 'Total Cases', 'Total Deaths', 'Total Recovered', 'Total Active Cases']]
+datacovid
 
 # Membuat list untuk location
-lokasi = list(data.Location.unique())
+lokasi = list(datacovid.Location.unique())
 
 # Membuat list tiap kolom
-col_list = list(data.columns)
+col_list = list(datacovid.columns)
 
 # Method untuk pembuatan dataset yang akan di select nanti
 def buat_dataset(lokasi, feature):

@@ -11,7 +11,7 @@ from bokeh.models.widgets import CheckboxGroup, Slider, RangeSlider, Tabs
 from bokeh.layouts import column, row, WidgetBox
 
 # Read data
-temp = pd.read_csv("./data/covid_19_indonesia_time_series_all.csv")
+temp = pd.read_csv("./data/covid19indonesia.csv")
 
 # Mengubah nilai kolom date dari object menjadi datetime
 temp["Date"] = pd.to_datetime(temp["Date"])
